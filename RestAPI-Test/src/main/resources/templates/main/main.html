@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<select name="categoryCode" id="categoryCode"></select>
+
+
+<script>
+    // category 정보 담겨있음
+    fetch('/category') // 아직은 js 객체가 아닌 형태만 js
+        .then(res => res.json()) // 형태만 js 인 녀석을 진짜 js 객체로 변환
+        .then(data => {
+
+            // html 요소 취득하기
+            const $categoryCode = document.getElementById("categoryCode");
+
+            // data 는 list 형태이기 때문에 반복문을 만들어준다.
+            for(let index in data) {
+                // 반복하는 만큼 option 태그 만들기
+                const $option = document.createElement("option");
+
+                $option.value = data[index].categoryCode;
+                $option.textContent = data[index].categoryName;
+                $categoryCode.appendChild($option);
+            }
+        })
+</script>
+</body>
+</html>
